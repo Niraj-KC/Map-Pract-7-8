@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'windows' }
 
     stages {
         stage('Checkout') {
@@ -7,27 +7,35 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Niraj-KC/Map-Pract-7-8/'
             }
         }
-        stage('Testing User-Service'){
-            steps{
-                cd './User'
+
+        stage('Testing User-Service') {
+            steps {
+                dir('User') {
+                    bat 'echo Inside User directory'
+                    bat 'npm install'
+                }
             }
         }
+
         stage('Build') {
             steps {
                 bat 'echo Building the application...'
-                sh 'npm install'  // or any build command
+                bat 'npm install'
             }
         }
+
         stage('Test') {
             steps {
                 bat 'echo Running tests...'
-                sh 'npm test'     // or pytest, mvn test, etc.
+                bat 'npm test'
             }
         }
+
         stage('Deploy') {
             steps {
-                bat 'echo Deploying...'
-                // e.g., run docker build, docker push, ssh to server, or kubectl apply
+                bat 'echo Deploying with docker-compose...'
+                bat 'docker-compose down'
+                bat 'docker-compose up -d --build'
             }
         }
     }
