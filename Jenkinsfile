@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 bat 'echo 🚀 Deploying using docker-compose...'
-                bat 'docker-compose down'
+                // bat 'docker-compose down'
                 bat 'docker-compose up -d --build'
             }
         }
