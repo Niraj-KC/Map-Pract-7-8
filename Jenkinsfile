@@ -9,19 +9,19 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'echo Building the application...'
+                bat 'echo Building the application...'
                 // sh 'npm install'  // or any build command
             }
         }
         stage('Test') {
             steps {
-                sh 'echo Running tests...'
+                bat 'echo Running tests...'
                 // sh 'npm test'     // or pytest, mvn test, etc.
             }
         }
         stage('Deploy') {
             steps {
-                sh 'echo Deploying...'
+                bat 'echo Deploying...'
                 // e.g., run docker build, docker push, ssh to server, or kubectl apply
             }
         }
