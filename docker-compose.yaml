@@ -152,6 +152,8 @@ services:
   ui:
     build: ./ui
     container_name: web-ui
+    ports:
+      - "80:80"
     networks:
       - my-network
 

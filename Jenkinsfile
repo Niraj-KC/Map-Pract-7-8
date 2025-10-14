@@ -1,5 +1,9 @@
 pipeline {
-    agent { label 'windows' }
+    agent any
+
+    environment {
+        SERVICES = "User Post"
+    }
 
     stages {
         stage('Checkout') {
@@ -8,32 +12,24 @@ pipeline {
             }
         }
 
-        stage('Testing User-Service') {
+        stage('Test Each Service') {
             steps {
-                dir('User') {
-                    bat 'echo Inside User directory'
-                    bat 'npm install'
+                script {
+                    def services = SERVICES.split(' ')
+                    for (s in services) {
+                        dir("${s}") {
+                            bat "echo 🚀 Testing ${s} service..."
+                            bat 'npm install'
+                            bat 'npm test'
+                        }
+                    }
                 }
-            }
-        }
-
-        stage('Build') {
-            steps {
-                bat 'echo Building the application...'
-                bat 'npm install'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                bat 'echo Running tests...'
-                bat 'npm test'
             }
         }
 
         stage('Deploy') {
             steps {
-                bat 'echo Deploying with docker-compose...'
+                bat 'echo 🚀 Deploying using docker-compose...'
                 bat 'docker-compose down'
                 bat 'docker-compose up -d --build'
             }
@@ -42,10 +38,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build and Deployment Successful!'
+            echo '✅ Build and deployment successful for all services!'
         }
         failure {
-            echo '❌ Build Failed!'
+            echo '❌ Build failed during testing or deployment.'
         }
     }
 }
