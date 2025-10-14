@@ -1,7 +1,6 @@
 // app.test.js
 import request from 'supertest';
 import { app } from './app.js';
-
 describe('Post API', () => {
     let newPostId;
 
