@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 # wait-for-it.sh — wait until a host:port is available
 
 set -e
