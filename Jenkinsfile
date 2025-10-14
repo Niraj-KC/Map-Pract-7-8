@@ -7,16 +7,21 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Niraj-KC/Map-Pract-7-8/'
             }
         }
+        stage('Testing User-Service'){
+            steps{
+                cd './User'
+            }
+        }
         stage('Build') {
             steps {
                 bat 'echo Building the application...'
-                // sh 'npm install'  // or any build command
+                sh 'npm install'  // or any build command
             }
         }
         stage('Test') {
             steps {
                 bat 'echo Running tests...'
-                // sh 'npm test'     // or pytest, mvn test, etc.
+                sh 'npm test'     // or pytest, mvn test, etc.
             }
         }
         stage('Deploy') {
