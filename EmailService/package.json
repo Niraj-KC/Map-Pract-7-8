@@ -1,0 +1,13 @@
+{
+    "scripts": {
+    "start": "node consumer.js",
+    "dev": "nodemon consumer.js"
+  },
+
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "kafkajs": "^2.2.4",
+    "nodemailer": "^7.0.9"
+  }
+}
+ 
