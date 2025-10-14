@@ -101,6 +101,7 @@ services:
       - kafka-3
     networks:
       - my-network
+    entrypoint: ["./wait-for-it.sh", "kafka-3", "19094", "--timeout=60", "--", "node", "index.js"]
 
   grafana:
     image: grafana/grafana:latest
