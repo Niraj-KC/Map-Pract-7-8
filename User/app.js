@@ -10,7 +10,7 @@ app.use(express.json());
 
 let users = [
   { id: 1, name: "Alice", email: "alice@example.com" },
-  { id: 2, name: "Bob-1", email: "bob@example.com" }
+  { id: 2, name: "Bob-2", email: "bob@example.com" }
 ];
 
 let curr_id = users.length + 1;
